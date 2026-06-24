@@ -1,0 +1,81 @@
+SuisseTVb — Instructions pour générer le site final (dossier "dist")
+=====================================================================
+
+Ce dossier contient le projet corrigé, prêt à builder, SANS dépendre de Replit.
+Je n'ai pas pu lancer le build moi-même (pas d'accès internet dans mon
+environnement), donc vous devez exécuter une seule commande vous-même,
+n'importe où où Node.js est installé (votre PC, ou un terminal Replit
+si vous préférez, ou n'importe quel service en ligne type StackBlitz/CodeSandbox).
+
+CE QUI A ÉTÉ CORRIGÉ DANS CE PROJET
+------------------------------------
+1. auth.tsx — l'inscription ne plante plus si l'enregistrement du profil
+   échoue côté base (le compte est créé quand même).
+2. subscribe.tsx — les erreurs d'enregistrement d'abonnement sont maintenant
+   visibles dans la console au lieu d'être silencieuses.
+3. vite.config.ts — reconstruit pour fonctionner hors Replit (n'exige plus
+   les variables PORT / BASE_PATH, ne dépend plus des plugins Replit).
+4. package.json — nettoyé : dépendance interne inutilisée retirée
+   (@workspace/api-client-react, qui n'était jamais importée dans le code),
+   versions figées identiques à celles du projet d'origine.
+5. .env — déjà rempli avec vos clés Supabase + Plisio actuelles.
+
+ÉTAPES POUR GÉNÉRER LE SITE FINAL
+------------------------------------
+
+Étape 1 — Installez Node.js si vous ne l'avez pas déjà
+   Téléchargez-le sur https://nodejs.org (version 20 ou plus récente).
+
+Étape 2 — Ouvrez un terminal dans le dossier artifacts/suissetvb
+   (le dossier qui contient ce fichier package.json)
+
+Étape 3 — Installez les dépendances
+   npm install
+
+   Cette étape télécharge tous les composants nécessaires.
+   Ça peut prendre 2 à 5 minutes selon votre connexion.
+
+Étape 4 — Lancez le build
+   npm run build
+
+   Si tout se passe bien, un nouveau dossier "dist" apparaît dans
+   artifacts/suissetvb. C'est CE dossier "dist" qu'il faut héberger.
+
+Étape 5 — Vérifiez le résultat avant de publier (optionnel mais recommandé)
+   npm run serve
+
+   Ouvrez l'adresse affichée dans le terminal (généralement
+   http://localhost:4173) pour voir le site exactement comme il
+   apparaîtra une fois en ligne. Testez l'inscription et la connexion.
+
+HÉBERGER LE DOSSIER "dist"
+------------------------------------
+Une fois le dossier "dist" généré :
+
+Netlify (le plus simple) :
+  1. Allez sur netlify.com, connectez-vous
+  2. Cliquez sur "Add new site" → "Deploy manually"
+  3. Glissez-déposez le dossier "dist" directement dans la page
+  4. Votre site est en ligne avec une adresse du type
+     votre-site.netlify.app
+
+Vercel :
+  1. Allez sur vercel.com, connectez-vous
+  2. "Add New Project" → upload manuel du dossier "dist"
+     (ou via leur CLI : npx vercel --prod depuis le dossier dist)
+
+À FAIRE APRÈS LA MISE EN LIGNE
+------------------------------------
+Une fois le site en ligne avec une vraie adresse (ex: suissetvb.netlify.app) :
+
+1. Allez sur supabase.com → votre projet → Authentication → URL Configuration
+2. Ajoutez dans "Redirect URLs" :
+   https://votre-adresse-finale/auth/callback
+3. Si vous utilisez la connexion Google, vérifiez aussi que Google est
+   bien activé dans Authentication → Providers avec votre Client ID/Secret.
+
+SI "npm run build" AFFICHE UNE ERREUR
+------------------------------------
+Copiez-collez l'erreur exacte ici et je vous dirai quoi corriger.
+Ne réessayez pas plusieurs fois sans me montrer l'erreur — ça pourrait être
+un simple module manquant facile à régler.
