@@ -1,0 +1,21 @@
+ok maintenant applique ses modification
+
+1: dans les paramettre il ya le bouton pour change le themme du site rende la fonctionnel
+
+2: dans la section abonnement WheelBet je vois dans l'abonement cote 2 tu a mis populaire il ne faut par mettre ce bage et aussi dans le description il fait bien precise que c'est une prediction par jour la ou tu a mis quatidienne.
+
+3: et pour les abonnement losqu'il clic sur l'abonnement la page qui saffiche doit leur donne aussi plus d'infos sur ce abonnement qu'il a choisi il doit avoir un petit bouton Lire les detaille de l'abonnement . chaque produit doit avoir une brieve description profetionnel expliquant au clien ce abonnement etc..
+
+4:  et sur le produit je vois du a dit , Recevez une prédiction quotidienne avec une cote de 2. Une opportunité chaque jour pour maximiser vos gains avec une fiabilité exceptionnelle. tu ne doit par dire ce genre te texte dans les produit il vaus bien leur infomet de la cote avec une animation de sortie et aussi pareille pour tout les abonnement ainsi que celle de fifa aussi dans le site.
+
+5: et aussi dans les tabeau des meriode d'abonnement tu a mis 1 mois 2 , 3 et 6 mois je veux que sa soit 1 mois , 2 mois avec 15% de reduction et 3 mois avec 25% de reduction et assure toi de bien retifie les pride au niveau de payement par crypto.
+
+6; su la oage d'acceuille du a dit bienvenu cher utilisateut du doit dir le nom de l'utilisateur comme bienvenu le nom du clien .
+
+7: et dans les abonnement de FIFA tu na par mis le nombre de prediction par jour
+sur tout les abonnement dit 2 prediction par jours
+et aussi sur les fiffa standar il revoie les prediction sous forme de victoir de equipe , total de but , total pair ou impair, equipe qui gagnera.
+et celle de Abonnements Penalty il recevron 3 par jour les prediction envoye son equipe qui gagne et le score exacte si disponible.
+
+tu peu ajoute d'autre option de jeux aussi et au lieur de dire Abonnements standards di plutt Abonnements FIFA Virtuel
+et la derniere chose se son les devicedu site losque un clien chage la devise tout les prix doit etre convertir a ce devise automatiquement et aussi tu ajoute des page de chaquement profetionnelle au site sur les bouton qui doivebt avoir comme lors de connexion et inscryption une chargement de 4 - 5 seconde.

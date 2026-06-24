@@ -1,0 +1,70 @@
+Crée un site web professionnel appelé SuisseTVb, plateforme suisse de pronostics sportifs basée à Bad Ragaz, Suisse. Design sombre élégant avec accents dorés, animations fluides, typographie premium.
+SUPABASE
+
+Anon Key : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ2cnVjbXpudGp6bHVmZXhub2hqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE5NDg2NDIsImV4cCI6MjA5NzUyNDY0Mn0.-qHAhpa89dXO9VzA1OVPIxQnN6gHxoW1k_R9kJoc0L4
+Crée les tables nécessaires : users (id, nom, prenom, pays, telephone, email, mot_de_passe_hash, date_inscription), abonnements (id, user_id, jeu, type_abonnement, heure_reception, email_reception, statut, mode_paiement, date_debut, date_expiration).
+LE SITE A QUATRE PAGES UNIQUEMENT
+
+Page d'accueil (publique et après connexion, contenus différents)
+Page abonnements Wheelbet
+Page abonnements FIFA Virtuel
+Page paramètres
+
+INSCRIPTION
+Formulaire avec : nom, prénom, pays (liste déroulante avec drapeaux et recherche), numéro de téléphone (indicatif automatique selon pays choisi), email, mot de passe (minimum 8 caractères avec indicateur de force). Bouton "S'inscrire avec Google" en plus du formulaire classique, avec le logo officiel Google.
+Après inscription réussie, envoyer automatiquement un email de confirmation contenant : un message de bienvenue personnalisé avec le prénom, la confirmation que le compte est créé, les informations de connexion affichées ainsi — "Email : [son email réel]" et "Mot de passe : celui que vous avez choisi lors de votre inscription" (jamais le mot de passe réel affiché), et un bouton "Se connecter" redirigeant vers la page de connexion.
+CONNEXION
+Formulaire simple avec uniquement email et mot de passe. Lien "Mot de passe oublié" qui envoie un email contenant un lien sécurisé pour réinitialiser le mot de passe.
+PAGE D'ACCUEIL — VERSION PUBLIQUE (sans connexion)
+Section héro avec logo SuisseTVb et titre accrocheur. Présentation des services disponibles (Wheelbet et FIFA Virtuel) sans afficher aucun prix. Section taux de réussite avec statistiques de fiabilité 98-99%. Section preuves clients avec témoignages et captures d'écran. Section avantages du service. Section FAQ avec questions fréquentes en accordéon. Footer avec : bouton Connexion, bouton Inscription, bouton canal Telegram, bouton contact assistant Telegram, email du support client.
+PAGE D'ACCUEIL — VERSION CONNECTÉE
+Complètement différente visuellement de la version publique. Contenu simple et professionnel : message de bienvenue avec prénom, statistiques personnelles, explication claire de comment fonctionne le service — comment jouer, où trouver ses prédictions, à quelle fréquence elles arrivent. Section claire et bien structurée.
+PAGE ABONNEMENTS WHEELBET
+Présente les abonnements suivants avec prix en euros :
+
+Cote 2 : 49€/mois (1 prédiction/jour) ou 25€/mois (1 prédiction/2 jours)
+Cote 3 : 35€/mois (1 prédiction/2 jours)
+Cote 6 : 80€/mois (1 prédiction/2 jours)
+Cote 12 VIP : 249€/mois (1 prédiction/3 jours)
+
+Réduction de 15% sur les abonnements de 3 mois.
+Chaque carte d'abonnement affiche d'abord une description claire et précise expliquant le fonctionnement, le type de prédiction reçue, la fréquence, puis en bas un bouton "M'abonner".
+PAGE ABONNEMENTS FIFA VIRTUEL
+Présente les abonnements suivants à 39€/mois (Wheelbet-style) :
+
+FC 26 · 5x5 Rush Superligue
+FC 24 · 4x4 Championnat d'Angleterre
+FC 25 · 3x3 Ligue de Conférence
+FC 26 · Championnat Ligue
+FC 25 · Championnat d'Angleterre
+FC 25 · Ligue Européenne
+
+Et à 45€/mois :
+
+FC 24 · Penalty
+FC 25 · Penalty
+FC 26 · Penalty
+
+Réduction de 15% sur les abonnements de 3 mois. Même structure : description claire en haut, bouton "M'abonner" en bas.
+PROCESSUS D'ABONNEMENT
+Quand le client clique sur "M'abonner", il est redirigé vers une page de paiement avec :
+Nom et prénom pré-remplis automatiquement depuis son compte.
+
+Email — case à cocher "Utiliser mon email d'inscription" ou champ pour saisir un autre email.
+
+Choix de l'heure de réception parmi quatre créneaux : 05h00 GMT, 12h00 GMT, 18h00 GMT, 20h00 GMT.
+Puis deux boutons de paiement apparaissent :
+Bouton "Payer avec Crypto" — intégration Plisio, le montant se calcule automatiquement selon l'abonnement et la durée choisis, sans afficher le nom Plisio sur le bouton (juste "Payer avec Crypto").
+Bouton "Payer avec l'Assistant" — au clic, n'ouvre pas directement la boîte mail. Affiche d'abord un message à l'écran expliquant : "Votre demande a été prise en charge. Veuillez lire les conditions ci-dessous et cocher la case pour continuer." Avec un texte explicatif court disant qu'un agent va le contacter pour confirmer la méthode de paiement disponible et qu'il recevra ses prédictions après confirmation du paiement. En dessous, un champ pour qu'il indique son mode de paiement préféré (Orange Money, Wave, MTN Money, etc.), avec une case à cocher obligatoire "J'ai lu et j'accepte les conditions". Le bouton "Confirmer et envoyer à l'assistant" reste désactivé tant que la case n'est pas cochée. Une fois cochée et cliqué, l'utilisateur est redirigé vers sa boîte email avec un message pré-rempli contenant automatiquement : son nom, prénom, l'abonnement choisi, la durée, le prix, l'email de réception, l'heure de réception choisie, et le mode de paiement qu'il a indiqué. Ce message est envoyé vers l'adresse support.suissetvbet@gmail.com.
+PAGE PARAMÈTRES
+Options disponibles :
+
+Changer le thème du site (clair/sombre)
+Changer la devise d'affichage
+Changer le mot de passe (avec vérification de l'ancien mot de passe)
+Contacter le support (bouton Telegram)
+Se déconnecter
+Supprimer définitivement le compte (en bas, avec confirmation avant suppression)
+
+DESIGN GÉNÉRAL
+Cohérent sur tout le site : fond sombre, accents dorés, typographie élégante, animations fluides sur les boutons et transitions de page, spinner de chargement professionnel lors des actions importantes.
