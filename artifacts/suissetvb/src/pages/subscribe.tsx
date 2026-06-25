@@ -40,6 +40,8 @@ export default function Subscribe() {
   const [isAssistantModalOpen, setIsAssistantModalOpen] = useState(false);
   const [assistantContactMethod, setAssistantContactMethod] = useState("Telegram");
   const [termsAccepted, setTermsAccepted] = useState(false);
+  const [isProcessingPayment, setIsProcessingPayment] = useState(false);
+  const [paymentError, setPaymentError] = useState("");
 
   useEffect(() => {
     if (!loading && !user) {
@@ -67,6 +69,9 @@ export default function Subscribe() {
   const finalEmail = useDefaultEmail ? user.email : customEmail;
 
   const handleCryptoPayment = async () => {
+    setIsProcessingPayment(true);
+    setPaymentError("");
+
     // Record pending subscription
     const { error: insertError } = await supabase.from("abonnements").insert({
       user_id: user.id,
@@ -103,7 +108,26 @@ export default function Subscribe() {
       api_key: plisioApiKey,
     });
 
-    window.location.href = `https://plisio.net/api/v1/invoices/new?${searchParams.toString()}`;
+    try {
+      const response = await fetch(
+        `https://api.plisio.net/api/v1/invoices/new?${searchParams.toString()}`
+      );
+      const result = await response.json();
+
+      if (result.status === "success" && result.data?.invoice_url) {
+        // Redirige vers la vraie page de paiement Plisio
+        window.location.href = result.data.invoice_url;
+      } else {
+        const message =
+          result.data?.message || "Une erreur est survenue lors de la création du paiement.";
+        setPaymentError(message);
+        setIsProcessingPayment(false);
+      }
+    } catch (err) {
+      console.error("Erreur appel API Plisio:", err);
+      setPaymentError("Impossible de contacter le service de paiement. Veuillez réessayer.");
+      setIsProcessingPayment(false);
+    }
   };
 
   const handleAssistantPayment = async () => {
@@ -218,11 +242,26 @@ export default function Subscribe() {
               </div>
             </div>
 
+            {paymentError && (
+              <p className="text-sm text-destructive text-center" data-testid="text-payment-error">
+                {paymentError}
+              </p>
+            )}
+
             <div className="space-y-3">
-              <Button onClick={handleCryptoPayment} className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-medium">
-                Payer avec Crypto
+              <Button
+                onClick={handleCryptoPayment}
+                disabled={isProcessingPayment}
+                className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-medium"
+              >
+                {isProcessingPayment ? "Création du paiement..." : "Payer avec Crypto"}
               </Button>
-              <Button onClick={() => setIsAssistantModalOpen(true)} variant="outline" className="w-full border-primary text-primary hover:bg-primary/10 font-medium">
+              <Button
+                onClick={() => setIsAssistantModalOpen(true)}
+                disabled={isProcessingPayment}
+                variant="outline"
+                className="w-full border-primary text-primary hover:bg-primary/10 font-medium"
+              >
                 Payer avec l'Assistant
               </Button>
             </div>
