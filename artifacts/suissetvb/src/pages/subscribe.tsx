@@ -39,6 +39,7 @@ export default function Subscribe() {
   const [duration, setDuration] = useState("1");
   const [isAssistantModalOpen, setIsAssistantModalOpen] = useState(false);
   const [assistantContactMethod, setAssistantContactMethod] = useState("Telegram");
+  const [preferredPaymentMethod, setPreferredPaymentMethod] = useState("");
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [isProcessingPayment, setIsProcessingPayment] = useState(false);
   const [paymentError, setPaymentError] = useState("");
@@ -132,7 +133,38 @@ export default function Subscribe() {
       console.error("Erreur enregistrement abonnement (assistant):", insertError.message);
     }
 
-    window.open("https://t.me/suissetvb", "_blank");
+    const messageLines = [
+      "Bonjour, je souhaite finaliser le paiement de mon abonnement SuisseTVb.",
+      "",
+      `Abonnement : ${planInfo.name}`,
+      `Durée : ${durationNum} mois`,
+      `Montant : ${formatPrice(finalPriceEur)}`,
+      `Email de réception : ${finalEmail}`,
+      `Heure de réception : ${receptionTime}`,
+      `Mode de paiement souhaité : ${preferredPaymentMethod || "à confirmer avec l'agent"}`,
+    ];
+    const message = messageLines.join("\n");
+
+    if (assistantContactMethod === "Email") {
+      const subject = encodeURIComponent(`Paiement abonnement ${planInfo.name}`);
+      const body = encodeURIComponent(message);
+      window.location.href = `mailto:support.suissetvbet@gmail.com?subject=${subject}&body=${body}`;
+    } else {
+      // Telegram ne permet pas de pré-remplir un message dans une conversation
+      // privée via un simple lien. On copie le message dans le presse-papier
+      // et on ouvre directement la conversation avec l'assistant (pas le canal).
+      try {
+        await navigator.clipboard.writeText(message);
+        toast({
+          title: "Message copié",
+          description: "Collez-le directement dans la conversation Telegram qui s'ouvre.",
+        });
+      } catch (err) {
+        console.error("Impossible de copier le message:", err);
+      }
+      window.open("https://t.me/Agent_SuisseTVb", "_blank");
+    }
+
     setIsAssistantModalOpen(false);
     setLocation("/profile"); // Redirect to profile or a pending state page
   };
@@ -273,14 +305,20 @@ export default function Subscribe() {
                   <Label htmlFor="c1">Telegram</Label>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="WhatsApp" id="c2" />
-                  <Label htmlFor="c2">WhatsApp</Label>
-                </div>
-                <div className="flex items-center space-x-2">
                   <RadioGroupItem value="Email" id="c3" />
                   <Label htmlFor="c3">Email</Label>
                 </div>
               </RadioGroup>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="preferred-payment-method">Mode de paiement souhaité</Label>
+              <Input
+                id="preferred-payment-method"
+                placeholder="Ex : Orange Money, Wave, MTN Money..."
+                value={preferredPaymentMethod}
+                onChange={(e) => setPreferredPaymentMethod(e.target.value)}
+              />
             </div>
 
             <div className="flex items-start space-x-2">
