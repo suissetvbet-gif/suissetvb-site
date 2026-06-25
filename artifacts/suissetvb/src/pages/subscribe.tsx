@@ -106,28 +106,14 @@ export default function Subscribe() {
       fail_url: window.location.origin + "/payment-failed",
       email: finalEmail || "",
       api_key: plisioApiKey,
+      // Demande à Plisio de rediriger directement vers la page de facture
+      // au lieu de renvoyer une réponse JSON brute.
+      redirect_to_invoice: "1",
     });
 
-    try {
-      const response = await fetch(
-        `https://api.plisio.net/api/v1/invoices/new?${searchParams.toString()}`
-      );
-      const result = await response.json();
-
-      if (result.status === "success" && result.data?.invoice_url) {
-        // Redirige vers la vraie page de paiement Plisio
-        window.location.href = result.data.invoice_url;
-      } else {
-        const message =
-          result.data?.message || "Une erreur est survenue lors de la création du paiement.";
-        setPaymentError(message);
-        setIsProcessingPayment(false);
-      }
-    } catch (err) {
-      console.error("Erreur appel API Plisio:", err);
-      setPaymentError("Impossible de contacter le service de paiement. Veuillez réessayer.");
-      setIsProcessingPayment(false);
-    }
+    // Redirection de page complète : contourne les restrictions CORS
+    // qui bloquent un appel fetch() direct depuis le navigateur vers l'API Plisio.
+    window.location.href = `https://api.plisio.net/api/v1/invoices/new?${searchParams.toString()}`;
   };
 
   const handleAssistantPayment = async () => {
